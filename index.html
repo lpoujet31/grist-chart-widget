@@ -1,10 +1,89 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 2rem;
+      }
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
   </head>
   <body>
-    <h1>La page se charge bien ✅</h1>
+    <h2>Volume horaire par modalité</h2>
+    <canvas id="myChart"></canvas>
+    <script>
+      let chart;
+
+      grist.ready();
+
+      grist.onRecords((records, context) => {
+        if (!records || records.length === 0) {
+          document.body.innerHTML += "<p>Aucune donnée sélectionnée.</p>";
+          return;
+        }
+
+        const r = records[0];  // Ligne sélectionnée
+
+        const labels = [
+          "Distanciel synchrone",
+          "Distanciel asynchrone",
+          "Mercredi après-midi en dpt",
+          "Congés scolaires",
+          "Regroupement présentiel",
+          "FIL",
+          "Formation de formateurs",
+          "Volume horaire total"
+        ];
+
+        const values = [
+          r.PROG_distanciel_synchrone,
+          r.PROG_distanciel_asynchrone,
+          r.PROG_mercredi_apres_midi_en_dpt,
+          r.PROG_conges_scolaires,
+          r.PROG_regroupement_presentiel,
+          r.PROG_FIL,
+          r.PROG_formation_de_formateurs,
+          r.MODULES_volume_horaire_total
+        ];
+
+        const config = {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Volume horaire (h)',
+              data: values,
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            scales: {
+              x: {
+                beginAtZero: true
+              }
+            },
+            plugins: {
+              legend: {
+                display: true
+              }
+            }
+          }
+        };
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        if (chart) chart.destroy();
+        chart = new Chart(ctx, config);
+      });
+    </script>
   </body>
 </html>
