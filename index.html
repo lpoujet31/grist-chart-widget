@@ -1,75 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
+    <title>Test</title>
   </head>
   <body>
-    <canvas id="myChart"></canvas>
-    <script>
-      let chart;
-
-      grist.ready();
-
-      grist.onRecords((records, context) => {
-        if (!records || records.length === 0) return;
-
-        const r = records[0];
-
-        const labels = [
-          "Distanciel synchrone",
-          "Distanciel asynchrone",
-          "Mercredi après-midi en dpt",
-          "Congés scolaires",
-          "Regroupement présentiel",
-          "FIL",
-          "Formation de formateurs",
-          "Volume horaire total"
-        ];
-
-        const values = [
-          r.PROG_distanciel_synchrone,
-          r.PROG_distanciel_asynchrone,
-          r.PROG_mercredi_apres_midi_en_dpt,
-          r.PROG_conges_scolaires,
-          r.PROG_regroupement_presentiel,
-          r.PROG_FIL,
-          r.PROG_formation_de_formateurs,
-          r.MODULES_volume_horaire_total
-        ];
-
-        const config = {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Volume horaire (h)',
-              data: values,
-              backgroundColor: 'rgba(54, 162, 235, 0.6)',
-              borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            indexAxis: 'y',
-            responsive: true,
-            scales: {
-              x: {
-                beginAtZero: true
-              }
-            },
-            plugins: {
-              legend: {
-                display: true
-              }
-            }
-          }
-        };
-
-        if (chart) chart.destroy();
-        const ctx = document.getElementById('myChart').getContext('2d');
-        chart = new Chart(ctx, config);
-      });
-    </script>
+    <h1>La page se charge bien ✅</h1>
   </body>
 </html>
