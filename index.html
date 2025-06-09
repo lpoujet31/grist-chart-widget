@@ -24,10 +24,12 @@
       grist.ready();
 
       grist.onRecords((records, context) => {
+        console.log("Reçu de Grist :", records);
         if (!records || records.length === 0) {
           document.body.innerHTML += "<p>Aucune donnée sélectionnée.</p>";
           return;
         }
+
 
         const r = records[0];
 
