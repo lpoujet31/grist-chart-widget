@@ -23,70 +23,14 @@
 
       grist.ready();
 
-      grist.onRecords((records, context) => {
-        console.log("Reçu de Grist :", records);
-        if (!records || records.length === 0) {
-          document.body.innerHTML += "<p>Aucune donnée sélectionnée.</p>";
-          return;
-        }
+      <script>
+        grist.ready();
+        grist.onRecords((records, context) => {
+          document.body.innerHTML += `<p>👍 Données reçues de Grist !</p>`;
+          console.log("🔍 Données :", records);
+        });
+      </script>
 
-
-        const r = records[0];
-
-        const labels = [
-          "Distanciel synchrone",
-          "Distanciel asynchrone",
-          "Mercredi après-midi en dpt",
-          "Congés scolaires",
-          "Regroupement présentiel",
-          "FIL",
-          "Formation de formateurs",
-          "Volume horaire total"
-        ];
-
-        const values = [
-          r.prog_distanciel_synchrone,
-          r.prog_distanciel_asynchrone,
-          r.prog_mercredi_apres_midi_en_dpt,
-          r.prog_conges_scolaires,
-          r.prog_regroupement_presentiel,
-          r.prog_fil,
-          r.prog_formation_de_formateurs,
-          r.modules_volume_horaire_total
-        ];
-
-        const config = {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Volume horaire (h)',
-              data: values,
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            indexAxis: 'y',
-            responsive: true,
-            scales: {
-              x: {
-                beginAtZero: true
-              }
-            },
-            plugins: {
-              legend: {
-                display: true
-              }
-            }
-          }
-        };
-
-        const ctx = document.getElementById('myChart').getContext('2d');
-        if (chart) chart.destroy();
-        chart = new Chart(ctx, config);
-      });
     </script>
   </body>
 </html>
