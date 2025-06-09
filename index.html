@@ -16,6 +16,13 @@
   </head>
   <body>
     <h2>Volume horaire par modalité</h2>
+    <script>
+      if (typeof grist === "undefined") {
+        document.body.innerHTML = "<p>❌ Objet grist non défini — Grist ne fournit pas de contexte.</p>";
+      } else {
+        document.body.innerHTML = "<p>✅ grist est bien défini.</p>";
+      }
+    </script>
     <canvas id="myChart"></canvas>
     <script>
       document.body.innerHTML += "<p>Script chargé, en attente de données de Grist...</p>";
